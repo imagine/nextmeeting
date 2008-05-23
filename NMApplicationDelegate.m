@@ -44,14 +44,17 @@
 		self.nextEvents = [CalCalendarStore eventsOccurringToday];
 	
 	for (CalEvent *event in nextEvents) {
-		if (!event.isAllDay && [event.startDate compare:[NSDate date]] == NSOrderedDescending) {
+		// show the event if isn't "all day" and if it starts no earlier than 10 mins ago
+		if (!event.isAllDay && [event.startDate timeIntervalSinceDate:[NSDate date]] > -660) {
 			NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 			unsigned int unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit;
 			NSDateComponents *components = [gregorian components:unitFlags fromDate:[NSDate date] toDate:event.startDate options:0];
 			hours = [components hour];
 			minutes = [components minute];
 			
-			if (hours == 0) {
+			if (hours == 0 && minutes == 0) {
+				timeRemaining = @"Now!";
+			} else if (hours == 0) {
 				timeRemaining = [NSString stringWithFormat:@"%d min%@", minutes, ((minutes == 1 || minutes == -1) ? @"" : @"s")];
 			} else {
 				NSString *minFraction = nil;
@@ -66,10 +69,11 @@
 			}
 
 			eventTitle = [NSString stringWithFormat:@"%@%@", event.title, ((event.location != nil) ? [@" at " stringByAppendingString:event.location] : @"")];
+			break;
 		}
 	}
 	
-	if (hours == 0 && minutes > 0 && minutes <= 15)
+	if (hours == 0 && minutes >= -10 && minutes <= 15)
 		statusItem.title = [[NSAttributedString alloc] initWithString:timeRemaining attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor redColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:14], NSFontAttributeName, nil]];
 	else
 		statusItem.title = timeRemaining;
