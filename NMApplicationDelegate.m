@@ -51,7 +51,7 @@
 		}
 	}
 	
-	if (hours == 0 && minutes <= 15)
+	if (hours == 0 && minutes > 0 && minutes <= 15)
 		[statusItem setTitle:[[NSAttributedString alloc] initWithString:timeRemaining attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor redColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:14], NSFontAttributeName, nil]]];		
 	else
 		[statusItem setTitle:timeRemaining];
