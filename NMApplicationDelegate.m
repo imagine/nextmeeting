@@ -35,6 +35,7 @@
 	int minutes = 0;
 	
 	NSString *timeRemaining = NO_EVENTS_TODAY;
+	NSString *eventTitle = nil;
 
 	if (nextEvents == nil)
 		self.nextEvents = [CalCalendarStore eventsOccurringToday];
@@ -47,14 +48,22 @@
 			hours = [components hour];
 			minutes = [components minute];
 			
-			timeRemaining = (hours == 0) ? [NSString stringWithFormat:@"%d mins", minutes] : [NSString stringWithFormat:@"%d hrs", hours];
+			if (hours == 0) {
+				timeRemaining = [NSString stringWithFormat:@"%d min%@", minutes, ((minutes == 1 || minutes == -1) ? @"" : @"s")];
+			} else {
+				timeRemaining = [NSString stringWithFormat:@"%d hr%@", hours, (hours == 1 ? @"" : @"s")];
+			}
+
+			eventTitle = [NSString stringWithFormat:@"%@%@", event.title, ((event.location != nil) ? [@" at " stringByAppendingString:event.location] : @"")];
 		}
 	}
 	
 	if (hours == 0 && minutes > 0 && minutes <= 15)
-		[statusItem setTitle:[[NSAttributedString alloc] initWithString:timeRemaining attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor redColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:14], NSFontAttributeName, nil]]];		
+		statusItem.title = [[NSAttributedString alloc] initWithString:timeRemaining attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor redColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:14], NSFontAttributeName, nil]];
 	else
-		[statusItem setTitle:timeRemaining];
+		statusItem.title = timeRemaining;
+
+	statusItem.toolTip = eventTitle;
 	
 	[self performSelector:@selector(updateStatusItemText) withObject:nil afterDelay:60];
 }
