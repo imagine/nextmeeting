@@ -17,6 +17,8 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventsChanged:) name:CalEventsChangedExternallyNotification object:[CalCalendarStore defaultCalendarStore]];	
 	
+	[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(updateStatusItemText) name:NSWorkspaceDidWakeNotification object:NULL];
+
 	self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
 	[statusItem setAction:@selector(showCalendar)];
 	
@@ -25,6 +27,7 @@
 
 - (void)finalize {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[[NSWorkspace sharedWorkspace] notificationCenter] removeObserver:self];
 	[super finalize];
 }
 
