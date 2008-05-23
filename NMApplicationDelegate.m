@@ -51,7 +51,15 @@
 			if (hours == 0) {
 				timeRemaining = [NSString stringWithFormat:@"%d min%@", minutes, ((minutes == 1 || minutes == -1) ? @"" : @"s")];
 			} else {
-				timeRemaining = [NSString stringWithFormat:@"%d hr%@", hours, (hours == 1 ? @"" : @"s")];
+				NSString *minFraction = nil;
+				if (minutes >= 7 && minutes <= 22)
+					minFraction = @"¼";
+				else if (minutes >= 23 && minutes <= 37)
+					minFraction = @"½";
+				else if (minutes >= 38 && minutes <= 52)
+					minFraction = @"¾";
+
+				timeRemaining = [NSString stringWithFormat:@"%d%@ hr%@", hours, (minFraction != nil ? [@" " stringByAppendingString:minFraction] : @""), (hours == 1 ? @"" : @"s")];
 			}
 
 			eventTitle = [NSString stringWithFormat:@"%@%@", event.title, ((event.location != nil) ? [@" at " stringByAppendingString:event.location] : @"")];
