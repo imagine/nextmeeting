@@ -1,9 +1,4 @@
-//
-//  CalCalendarStoreAdditions.m
-//  Next Meeting
-//
-//  Created by Nathan Spindel on 5/21/08.
-//
+/* Public domain */
 
 #import "CalCalendarStoreAdditions.h"
 
