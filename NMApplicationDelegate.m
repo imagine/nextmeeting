@@ -71,10 +71,9 @@
 		}
 	}
 	
-	if (hours == 0 && minutes >= -10 && minutes <= 15 && ![timeRemaining isEqualTo:NO_EVENTS_TODAY])
-		statusItem.title = [[NSAttributedString alloc] initWithString:timeRemaining attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor redColor], NSForegroundColorAttributeName, [NSFont systemFontOfSize:14], NSFontAttributeName, nil]];
-	else
-		statusItem.title = timeRemaining;
+	BOOL showInRed = (hours == 0 && minutes >= -10 && minutes <= 15 && ![timeRemaining isEqualTo:NO_EVENTS_TODAY]);
+
+	statusItem.title = [[NSAttributedString alloc] initWithString:timeRemaining attributes:[NSDictionary dictionaryWithObjectsAndKeys:(showInRed ? [NSColor redColor] : [NSColor blackColor]), NSForegroundColorAttributeName, [NSFont systemFontOfSize:14], NSFontAttributeName, nil]];
 
 	statusItem.toolTip = eventTitle;
 	
