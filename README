@@ -1,0 +1,11 @@
+Next Meeting
+
+Next Meeting is a simple little menu bar application that displays the time remaining until your next event in iCal.
+
+Author: Nathan Spindel nathans@gmail.com
+
+TODO
+- make the text more 'fuzzy'
+- add a menu that has a list of the next meetings and Quit
+
+All of the code in Next Meeting has been dedicated to the public domain by the author. Anyone is free to copy, modify, publish, use, compile, sell, or distribute the original Next Meeting code, either in source code form or as a compiled binary, for any purpose, commercial or non-commercial, and by any means.
