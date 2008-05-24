@@ -73,7 +73,9 @@
 	
 	BOOL showInRed = (hours == 0 && minutes >= -10 && minutes <= 15 && ![timeRemaining isEqualTo:NO_EVENTS_TODAY]);
 
+	NSDisableScreenUpdates();
 	statusItem.title = [[NSAttributedString alloc] initWithString:timeRemaining attributes:[NSDictionary dictionaryWithObjectsAndKeys:(showInRed ? [NSColor redColor] : [NSColor blackColor]), NSForegroundColorAttributeName, [NSFont systemFontOfSize:14], NSFontAttributeName, nil]];
+	NSEnableScreenUpdates();
 
 	statusItem.toolTip = eventTitle;
 	
