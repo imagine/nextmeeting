@@ -16,7 +16,7 @@
 		NSArray *matchingEvents = [[containingCalendar events] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"uid == %@", self.uid]];
 		if ([matchingEvents count] > 0)
 			[[matchingEvents lastObject] show];
-    }
+	}
 }
 
 @end
