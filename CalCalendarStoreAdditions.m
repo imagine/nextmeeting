@@ -10,9 +10,16 @@
 	CalCalendarStore *defaultStore = [self defaultCalendarStore];
 	
 	NSPredicate *todayPredicate = [self eventPredicateWithStartDate:[NSDate dateWithTimeIntervalSinceNow:-1200] endDate:[NSDate dateWithTimeIntervalSinceNow:60*60*24] calendars:[defaultStore calendars]];
-	NSArray *events = [defaultStore eventsWithPredicate:todayPredicate];
+	NSArray *todaysEvents = [defaultStore eventsWithPredicate:todayPredicate];
+
+	NSMutableArray *events = [NSMutableArray array];
+	for (CalEvent *potentialEvent in todaysEvents) {
+		if (!potentialEvent.isAllDay && [potentialEvent.startDate timeIntervalSinceDate:[NSDate date]] > -660) {
+			[events addObject:potentialEvent];
+		}
+	}
 	
-	return [events sortedArrayUsingDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:YES]]];
+	return events;
 }
 
 @end

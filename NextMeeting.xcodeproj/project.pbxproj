@@ -14,7 +14,24 @@
 		D83C0E7F0DE537D500461CFC /* NMApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D83C0E7E0DE537D500461CFC /* NMApplicationDelegate.m */; };
 		D83C0EA70DE538F300461CFC /* CalendarStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83C0EA60DE538F300461CFC /* CalendarStore.framework */; };
 		D83C0EE80DE539FA00461CFC /* CalCalendarStoreAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D83C0EE70DE539FA00461CFC /* CalCalendarStoreAdditions.m */; };
+		D8423F520DE8F307000FF954 /* iCal.app in Sources */ = {isa = PBXBuildFile; fileRef = D8423F500DE8F2E1000FF954 /* iCal.app */; };
+		D8423F580DE8F32E000FF954 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8423F570DE8F32D000FF954 /* ScriptingBridge.framework */; };
+		D8423FFD0DE8FDC9000FF954 /* CalEventAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D8423FFC0DE8FDC9000FF954 /* CalEventAdditions.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		D8423F4C0DE8F27E000FF954 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.app";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILES_DIR)/$(INPUT_FILE_BASE).h",
+			);
+			script = "sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -31,6 +48,10 @@
 		D83C0EA60DE538F300461CFC /* CalendarStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CalendarStore.framework; path = System/Library/Frameworks/CalendarStore.framework; sourceTree = SDKROOT; };
 		D83C0EE60DE539FA00461CFC /* CalCalendarStoreAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalCalendarStoreAdditions.h; sourceTree = "<group>"; };
 		D83C0EE70DE539FA00461CFC /* CalCalendarStoreAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalCalendarStoreAdditions.m; sourceTree = "<group>"; };
+		D8423F500DE8F2E1000FF954 /* iCal.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = iCal.app; path = /Applications/iCal.app; sourceTree = "<absolute>"; };
+		D8423F570DE8F32D000FF954 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		D8423FFB0DE8FDC9000FF954 /* CalEventAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalEventAdditions.h; sourceTree = "<group>"; };
+		D8423FFC0DE8FDC9000FF954 /* CalEventAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalEventAdditions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +61,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				D83C0EA70DE538F300461CFC /* CalendarStore.framework in Frameworks */,
+				D8423F580DE8F32E000FF954 /* ScriptingBridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +75,8 @@
 				D83C0E7E0DE537D500461CFC /* NMApplicationDelegate.m */,
 				D83C0EE60DE539FA00461CFC /* CalCalendarStoreAdditions.h */,
 				D83C0EE70DE539FA00461CFC /* CalCalendarStoreAdditions.m */,
+				D8423FFB0DE8FDC9000FF954 /* CalEventAdditions.h */,
+				D8423FFC0DE8FDC9000FF954 /* CalEventAdditions.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -91,6 +115,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				D8423F570DE8F32D000FF954 /* ScriptingBridge.framework */,
 			);
 			name = "Next Meeting";
 			sourceTree = "<group>";
@@ -100,6 +125,7 @@
 			children = (
 				32CA4F630368D1EE00C91783 /* NextMeeting_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				D8423F500DE8F2E1000FF954 /* iCal.app */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -135,6 +161,7 @@
 				8D11072E0486CEB800E47090 /* Frameworks */,
 			);
 			buildRules = (
+				D8423F4C0DE8F27E000FF954 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -181,6 +208,8 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				D83C0E7F0DE537D500461CFC /* NMApplicationDelegate.m in Sources */,
 				D83C0EE80DE539FA00461CFC /* CalCalendarStoreAdditions.m in Sources */,
+				D8423FFD0DE8FDC9000FF954 /* CalEventAdditions.m in Sources */,
+				D8423F520DE8F307000FF954 /* iCal.app in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
