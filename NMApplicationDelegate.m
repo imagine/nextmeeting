@@ -14,7 +14,7 @@
 - (void)awakeFromNib {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventsChanged:) name:CalEventsChangedExternallyNotification object:[CalCalendarStore defaultCalendarStore]];	
 	
-	[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(updateStatusItemText) name:NSWorkspaceDidWakeNotification object:NULL];
+	[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(updateStatusItem) name:NSWorkspaceDidWakeNotification object:NULL];
 
 	self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
 	statusItem.menu = statusItemMenu;
