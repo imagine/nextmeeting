@@ -32,8 +32,7 @@
 #pragma mark -
 
 - (void)updateStatusItem {
-	if (nextEvents == nil)
-		self.nextEvents = [CalCalendarStore eventsOccurringToday];
+	self.nextEvents = [CalCalendarStore eventsOccurringToday];
 
 	[self updateStatusItemTitle];
 	[self updateStatusItemMenu];
@@ -42,8 +41,6 @@
 }
 
 - (void)eventsChanged:(NSNotification *)notification {
-	self.nextEvents = nil; // invalidate the event cache
-	
 	[self updateStatusItem];
 }
 
