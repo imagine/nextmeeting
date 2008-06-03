@@ -1,0 +1,4 @@
+ 1) add pref window and ability to show as dock icon, show as menu item, or show both
+ 2) change format string to #h#m#s, displayed using lowest common denominator and truncating seconds until the last minute.
+
+For #2, I was thinking about making what I described the default, and having the pref window show some radio buttons for a few different formats.  What do you think?
